@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>icons/Pause.png</file>
+        <file>icons/Play.png</file>
+        <file>icons/Record.png</file>
+        <file>icons/Stop.png</file>
+        <file>icons/microphone.png</file>
+    </qresource>
+</RCC>
