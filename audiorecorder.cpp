@@ -75,7 +75,6 @@ AudioRecorder::AudioRecorder(QWidget *parent) :
 
 
     //audio devices
-    ui->audioDeviceBox->addItem(tr("Default"), QVariant(QString()));
     foreach (const QString &device, audioRecorder->audioInputs()) {
         ui->audioDeviceBox->addItem(device, QVariant(device));
     }
