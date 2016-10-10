@@ -91,7 +91,7 @@ AudioRecorder::AudioRecorder(QWidget *parent) :
         ui->containerBox->addItem(containerName, QVariant(containerName));
 
     }
-    index = ui->containerBox->findText("wav");
+    index = ui->containerBox->findText("wav", Qt::MatchContains);
     if ( index != -1 ) ui->containerBox->setCurrentIndex(index);
 
     //sample rate
@@ -102,10 +102,10 @@ AudioRecorder::AudioRecorder(QWidget *parent) :
     }
 
     //channels
-    ui->channelsBox->addItem(tr("Default"), QVariant(-1));
     ui->channelsBox->addItem(QStringLiteral("1"), QVariant(1));
     ui->channelsBox->addItem(QStringLiteral("2"), QVariant(2));
     ui->channelsBox->addItem(QStringLiteral("4"), QVariant(4));
+    ui->channelsBox->setCurrentIndex(1);
 
     //quality
     ui->qualitySlider->setRange(0, int(QMultimedia::VeryHighQuality));
@@ -415,7 +415,6 @@ void AudioRecorder::processBuffer(const QAudioBuffer& buffer)
         audioLevels.at(i)->setLevel(volume * levels.at(i));
         audioWaveforms.at(i)->updateLevel(volume * levels.at(i));
     }
-
 }
 
 void AudioRecorder::on_volumeSlider_valueChanged(int value)
