@@ -89,7 +89,6 @@ AudioRecorder::AudioRecorder(QWidget *parent) :
     ui->containerBox->addItem(tr("Default"), QVariant(QString()));
     foreach (const QString &containerName, audioRecorder->supportedContainers()) {
         ui->containerBox->addItem(containerName, QVariant(containerName));
-
     }
     index = ui->containerBox->findText("wav", Qt::MatchContains);
     if ( index != -1 ) ui->containerBox->setCurrentIndex(index);
