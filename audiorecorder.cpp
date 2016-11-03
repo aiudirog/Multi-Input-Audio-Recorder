@@ -38,6 +38,7 @@
 **
 ****************************************************************************/
 
+#include <QMessageBox>
 #include <QAudioProbe>
 #include <QAudioRecorder>
 #include <QDir>
@@ -161,7 +162,7 @@ void AudioRecorder::updateStatus(QMediaRecorder::Status status)
 
     switch (status) {
     case QMediaRecorder::RecordingStatus:
-        statusMessage = tr("Recording to %1").arg(audioRecorder->actualLocation().toString());
+        statusMessage = tr("Recording to %1").arg(audioRecorder->outputLocation().toString());
         break;
     case QMediaRecorder::PausedStatus:
         clearAudioLevels();
@@ -263,10 +264,20 @@ void AudioRecorder::togglePause()
 void AudioRecorder::setOutputLocation()
 {
     QString fileName = QFileDialog::getSaveFileName();
-    audioRecorder->setOutputLocation(QUrl::fromLocalFile(fileName));
-    outputLocationSet = true;
-    if (!fileName.isEmpty())
-        ui->outputButton->setText(fileName);
+    if (!fileName.isEmpty()) {
+        if (audioRecorder->setOutputLocation(QUrl::fromLocalFile(fileName))) {
+            ui->outputButton->setText(fileName);
+            outputLocationSet = true;
+        } else {
+            QMessageBox::information(
+                this,
+                tr("Output File not Valid"),
+                tr("The file you have selected is not availible. Please chose another one.")
+            );
+            this->setOutputLocation();
+        }
+
+    }
 }
 
 void AudioRecorder::displayErrorMessage()
