@@ -28,3 +28,5 @@ QT+=widgets
 
 RESOURCES += \
     resources.qrc
+    
+ICON = icons/microphone.icns
