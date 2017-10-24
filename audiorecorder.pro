@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = audiorecorder
+TARGET = JHDB Multi Input Audio Recorder
 
 QT += multimedia
 
